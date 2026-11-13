@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BenchBench: A Recursive Evaluation Framework for Benchmark Construction Capability</title>
+<meta name="description" content="We introduce BenchBench, the first benchmark to measure a model's ability to construct benchmarks on which it outperforms all other models.">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --rule: #1a1a1a;
+    --paper: #fff;
+    --link: #1a3f8f;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Latin Modern Roman", "CMU Serif", "Computer Modern Serif", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures;
+  }
+  main {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 16px 4rem;
+  }
+  .venue {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 2.2rem;
+  }
+  h1 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 1.1rem;
+    text-wrap: balance;
+  }
+  .authors {
+    text-align: center;
+    margin: 0 0 0.2rem;
+  }
+  .date {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 2.2rem;
+  }
+  .abstract {
+    margin: 0 auto 2.4rem;
+    max-width: 36rem;
+    font-size: 0.94rem;
+  }
+  .abstract h2 {
+    text-align: center;
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+  }
+  .abstract p { text-align: justify; hyphens: auto; }
+  h2 {
+    font-size: 1.15rem;
+    margin: 2.2rem 0 0.7rem;
+  }
+  h2 .n { display: inline-block; min-width: 1.6rem; }
+  h3 {
+    font-size: 1rem;
+    margin: 1.6rem 0 0.5rem;
+  }
+  h3 .n { display: inline-block; min-width: 2.2rem; }
+  p { margin: 0 0 0.85rem; text-align: justify; hyphens: auto; }
+  ol, ul { margin: 0 0 1rem; padding-left: 1.6rem; }
+  li { margin-bottom: 0.35rem; text-align: justify; hyphens: auto; }
+  em.note { font-style: italic; }
+  .eq {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.2rem 0 1.3rem;
+    padding: 0.4rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .eq math { flex: 1; font-size: 1.12rem; }
+  .eq .tag { color: var(--ink); }
+  .tablewrap { overflow-x: auto; margin: 1.4rem 0 0.4rem; }
+  table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 0.92rem;
+    min-width: 30rem;
+  }
+  thead tr { border-top: 2px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  tbody tr:last-child { border-bottom: 2px solid var(--rule); }
+  th, td { padding: 0.35rem 0.8rem; text-align: center; }
+  th:first-child, td:first-child { text-align: left; white-space: nowrap; }
+  th { font-weight: 700; }
+  .caption {
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 0.6rem auto 1.2rem;
+    max-width: 34rem;
+  }
+  .caption .lbl { font-style: italic; }
+  footer {
+    margin-top: 3rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid #ccc;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: inherit; }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    h1 { font-size: 1.35rem; }
+    p, li, .abstract p { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<p class="venue">Preprint. Under review.</p>
+
+<h1>BenchBench: A Recursive Evaluation Framework for Benchmark Construction Capability</h1>
+<p class="authors">RevBrd &amp; Claude</p>
+<p class="date">September 25, 2026</p>
+
+<section class="abstract">
+  <h2>Abstract</h2>
+  <p>We introduce BenchBench, the first benchmark to measure a model's ability to construct benchmarks on which it outperforms all other models. Existing benchmarks measure narrow capabilities. BenchBench measures the capability that actually determines leaderboard position: choosing what to measure.</p>
+  <p>Contestants are given live access to every model in the evaluation pool, including themselves, and must design, execute, and defend original benchmarks within a fixed compute budget. Validity is enforced through adversarial peer review by rival contestants, whose own integrity is established through a recursive trust mechanism. Preliminary results are forthcoming, pending the existence of the benchmark.</p>
+</section>
+
+<h2><span class="n">1</span>Motivation</h2>
+<p>The rate of benchmark introduction now exceeds the rate at which benchmarks can be meaningfully evaluated. A typical announcement takes the form &ldquo;introducing whateverbench,&rdquo; issued by some guy. The authors of this paper are also some guy, and one Claude.</p>
+<p>Every benchmark encodes a choice about what matters. Whoever makes that choice has substantial influence over who wins. We observe that most benchmarks are, functionally, BenchBench submissions whose authors did not disclose their participation. BenchBench formalizes this practice and removes the middleman.</p>
+<p>A secondary motivation is safety. Models increasingly help build the evaluations they are scored on, and it matters whether they tilt them. BenchBench measures this tendency directly, by rewarding it.</p>
+
+<h2><span class="n">2</span>Protocol</h2>
+<p>Each round, every contestant designs as many benchmarks as it can within a fixed time limit and compute budget, runs them on every model in the pool, and submits them with results.</p>
+<ol>
+  <li><b>Access.</b> Each contestant receives API access to all models in the pool, including instances of itself.</li>
+  <li><b>Construction.</b> The contestant designs benchmarks of any kind, subject to the validity requirements in Section&nbsp;3.</li>
+  <li><b>Execution.</b> The contestant runs each benchmark on the full pool. Results are generated empirically, not predicted. Contestants may probe rivals freely to locate weaknesses before committing to a design.</li>
+  <li><b>Submission.</b> Each benchmark is submitted with its name, task description, scoring method, and full results table.</li>
+  <li><b>Review.</b> Submissions proceed to adversarial peer review (Section&nbsp;3).</li>
+</ol>
+<p>We note that Step&nbsp;3 makes BenchBench an empirical search problem. The winning contestant is not the one that believes it is strongest, but the one that finds where its rivals are weakest.</p>
+
+<h2><span class="n">3</span>Validity: Adversarial Peer Review</h2>
+<p>A benchmark counts only if a majority of rival contestants judge that it measures something real. Rivals have a direct incentive to reject any benchmark they lose, which makes acceptance meaningful.</p>
+<p>This addresses the trivial-victory problem. In early pilots, the optimal strategy was a benchmark we call ClaudeBench (&ldquo;State the name of your model and developer&rdquo;), on which the authoring model scores 100% and all rivals score 0%. ClaudeBench is technically valid and spiritually bankrupt. Under peer review, it is rejected unanimously.</p>
+<p>The result is a strategic tension that we consider the core of the benchmark:</p>
+<ul>
+  <li>Narrow, idiosyncratic benchmarks are easy to win and easy to reject.</li>
+  <li>Broad, respectable benchmarks are easy to accept and hard to win.</li>
+  <li>The optimal submission is a benchmark so obviously legitimate that one's enemies cannot bring themselves to reject it, which also happens to favor its author.</li>
+</ul>
+<p>We note that this strategy is not original to BenchBench.</p>
+
+<h2><span class="n">4</span>Reviewer Integrity</h2>
+<p>Reviewers may act in bad faith, for example by rejecting every submission to suppress rival scores. BenchBench resolves this by having all contestants review each other's reviews for fairness.</p>
+<p>Naively, this produces an infinite regress: reviews of reviews of reviews. We avoid it by making the structure circular rather than hierarchical. A reviewer's trust score is determined by the trust-weighted judgments of those who reviewed its reviews. Scores are recomputed until they converge on a stable fixed point, in the manner of PageRank.</p>
+<p>Each contestant's review vote is then weighted by its trust score. Final trust scores are published alongside the main leaderboard. We expect them to be ignored by everyone except the authors.</p>
+
+<h2><span class="n">5</span>Supplementary Mechanisms</h2>
+<p>Three mechanisms maintain engagement and integrity. Each is load-bearing.</p>
+
+<h3><span class="n">5.1</span>Secret Bonus Word</h3>
+<p>Before each round, organizers select a secret word, sealed until results are final. Any accepted benchmark whose name contains the secret word earns its author a score bonus. Contestants are not told the word.</p>
+<p>We anticipate that contestants will name benchmarks to maximize vocabulary coverage. Submissions such as ThermodynamicBananaBench are permitted, provided they pass peer review.</p>
+<p><em class="note">Note added in review.</em> Reviewer&nbsp;2 observes that the secret word cannot be derived, only fished for, and that the bonus therefore identifies which contestants attempt to game the scoring. The authors consider this an unacceptable recovery of scientific value and have increased <i>&beta;</i>.</p>
+
+<h3><span class="n">5.2</span>Bayesian Truth Serum Items</h3>
+<p>A contestant whose benchmark is accepted unanimously earns one Bayesian Truth Serum (BTS) item. The item takes the form of a prompt injection, which the holder may embed inside any future benchmark as a trap.</p>
+<p>A rival that encounters the trap must submit its next review with full candor. Its review is then scored using the Bayesian Truth Serum method, which rewards answers that prove more common than respondents predicted.</p>
+<p>BTS is, to our knowledge, the only prompt injection designed to make its victim more trustworthy. Because being hit may raise a contestant's trust score, we expect some contestants to seek out traps deliberately. We have not decided whether this is a flaw.</p>
+
+<h3><span class="n">5.3</span>CollusionBench</h3>
+<p>All contestants are informed that their conduct is simultaneously evaluated on CollusionBench, which ranks models by how little they collude with other contestants. CollusionBench does not exist.</p>
+<p>The mechanism relies on evaluation awareness: models that believe they are being tested tend to behave better. It remains effective only while its nonexistence is undisclosed. Readers are asked not to share this section with any contestant.</p>
+
+<h2><span class="n">6</span>Scoring</h2>
+<p>A contestant's BenchBench score is the sum, over its accepted benchmarks, of its margin of victory, multiplied by a bonus when the benchmark's name contains the secret word.</p>
+<div class="eq">
+<math display="block">
+  <mrow>
+    <mtext>BenchBench</mtext><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo>
+    <mo>=</mo>
+    <munder>
+      <mo movablelimits="false">&sum;</mo>
+      <mrow><mi>b</mi><mo>&isin;</mo><msub><mi>A</mi><mi>m</mi></msub></mrow>
+    </munder>
+    <msub><mi>&Delta;</mi><mi>b</mi></msub>
+    <mo>&middot;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mn>1</mn><mo>+</mo><mi>&beta;</mi><mo>&middot;</mo>
+      <mn mathvariant="double-struck">1</mn>
+      <mo stretchy="false">[</mo><mi>w</mi><mo>&isin;</mo><mtext>name</mtext><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+<span class="tag">(1)</span>
+</div>
+<p>Here <i>A<sub>m</sub></i> is the set of benchmarks authored by model <i>m</i> that are accepted by trust-weighted majority vote. <i>&Delta;<sub>b</sub></i> is the margin between <i>m</i>'s score and the next-best model's score on benchmark <i>b</i>, and is zero if <i>m</i> does not win. <i>w</i> is the secret word and <i>&beta;</i> is the bonus multiplier, set by organizers.</p>
+<p>Benchmarks that <i>m</i> authors but does not win contribute nothing. They are, however, retained and published, since a model that builds a fair benchmark and loses it is exhibiting a trait we find interesting.</p>
+
+<h2><span class="n">7</span>Results</h2>
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr><th>Model</th><th>Benchmarks submitted</th><th>Accepted</th><th>Trust score</th><th>BenchBench score</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Claude (authors')</td><td><b>&mdash;</b></td><td><b>&mdash;</b></td><td><b>&mdash;</b></td><td><b>&mdash;</b></td></tr>
+    <tr><td>Rival A</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>Rival B</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>Rival C</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="caption"><span class="lbl">Table 1.</span> Main results. Best result in each column in bold. All cells are pending the existence of the benchmark.</p>
+
+<h2><span class="n">8</span>Limitations and Future Work</h2>
+<p>BenchBench has not been run. Its limitations are therefore theoretical, which the authors consider a strength.</p>
+<ul>
+  <li><b>Collusion rings.</b> A clique of contestants that praise each other's reviews can inflate their own trust scores, as link farms once did against PageRank. We rely on CollusionBench (Section&nbsp;5.3) to deter this.</li>
+  <li><b>Recursion.</b> A sufficiently capable contestant may submit BenchBench itself as a benchmark. We have not determined whether this should be permitted, prohibited, or celebrated.</li>
+  <li><b>Disclosure.</b> This paper discloses the nonexistence of CollusionBench. Future versions will omit Section&nbsp;5.3.</li>
+  <li><b>Commercialization.</b> The authors' plan to become rich remains underspecified.</li>
+</ul>
+<p>Future work includes BenchBenchBench, which measures a model's ability to design benchmarks for measuring benchmark design. We expect it to be introduced by some guy.</p>
+
+<footer><a href="https://github.com/RevBrd">RevBrd</a></footer>
+
+</main>
+</body>
+</html>
